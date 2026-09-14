@@ -1,0 +1,72 @@
+; ============================================================
+; Asterisk PJSIP Configuration
+; Two SIP clients: 1001 and 1002
+;
+; IMPORTANT:
+; Replace CHANGE_ME with strong passwords before deployment.
+; ============================================================
+
+[transport-udp]
+type=transport
+protocol=udp
+bind=0.0.0.0:5060
+
+
+; ============================================================
+; CLIENT 1001
+; ============================================================
+
+[1001]
+type=endpoint
+transport=transport-udp
+context=internal
+disallow=all
+allow=ulaw
+auth=1001
+aors=1001
+
+; NAT-aware settings
+rtp_symmetric=yes
+force_rport=yes
+rewrite_contact=yes
+direct_media=no
+
+[1001]
+type=auth
+auth_type=userpass
+username=1001
+password=CHANGE_ME
+
+[1001]
+type=aor
+max_contacts=1
+
+
+; ============================================================
+; CLIENT 1002
+; ============================================================
+
+[1002]
+type=endpoint
+transport=transport-udp
+context=internal
+disallow=all
+allow=ulaw
+auth=1002
+aors=1002
+
+; NAT-aware settings
+rtp_symmetric=yes
+force_rport=yes
+rewrite_contact=yes
+direct_media=no
+
+[1002]
+type=auth
+auth_type=userpass
+username=1002
+password=CHANGE_ME
+
+[1002]
+type=aor
+max_contacts=1
